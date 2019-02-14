@@ -1,0 +1,27 @@
+hostname-DIN80045047
+
+identifying no-SGH619SLJ4
+\\10.51.92.154\Hostnames
+
+payroll-https://ess.excelityglobal.com/LoginServlet
+eduonix microservices 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#1/bin/bash
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+echo "Hello World" 
+>/var/www/html/index.html/
