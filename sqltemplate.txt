@@ -1,0 +1,44 @@
+create table user(  
+userId number(10),  
+userName varchar2(30), 
+email varchar2(30),  
+contact number(10),
+password varchar2(30) 
+);  
+ INSERT INTO customer1( userId, userName, email, contact, password)
+   values(1, 'Birpatil', 'birpatil@capg.com,91007766,'1234');
+INSERT INTO customer1 values(2, 'Sneha', 'sneha@capg.com',91005566,'1324');
+INSERT INTO customer1( userId, userName, email, contact, password)
+   values(3, 'Swathi', 'swathi@capg.com',91003366,'1243');
+INSERT INTO customer1( userId, userName, email, contact, password)
+   values(4, 'Prathyusha', 'prathyusha@capg.com',91002266,'1342');
+INSERT INTO customer1( userId, userName, email, contact, password)
+   values(5, 'Kowshik', 'kowshik@capg.com',91001166,'1204');
+
+
+create table product(  
+productId number(10),  
+productName varchar2(30), 
+productPrice varchar2(30) );
+
+INSERT INTO product1 values(1,'Redmi',11000);
+INSERT INTO product(productId ,productName, productPrice)
+values(2,'Samsung',12000);
+INSERT INTO product(productId ,productName, productPrice)
+values(3,'Nokia',10000);
+INSERT INTO product(productId ,productName, productPrice)
+values(4,'Iphone',30000);
+INSERT INTO product(productId ,productName, productPrice)
+values(5,'Micromax',9000);
+
+
+create table product( 
+userId number(10), 
+productId number(20),  
+productName varchar2(30), 
+quantity varchar2(20),  
+price number(20),
+total number(20));
+
+INSERT INTO product(userId,productId ,productName,quantity, price,total)
+values(1,1121,'Redmi',11000);

@@ -1,0 +1,49 @@
+<div style="text-align:center">
+    <h2> {{ name }}</h2></div>
+
+<div class="container-fluid" class="align-center">
+   <div class="row"> 
+      <div class="col-md-4 col-sm-4 col-xs-8"></div>
+    <div class="col-md-4 col-sm-4 col-xs-8">
+     <form #frm="ngForm" class="form-container">
+       <div class="form-group">
+       <label for="UserName">UserName:</label>
+       <input type="text" class="form-control" placeholder="Enter Name" name="UserName" ngModel>
+       </div>
+      <div class="form-group">
+      <label for="Password">Password:</label>
+      <input type="password" class="form-control" placeholder="Enter Password" name="Password" ngModel>
+      </div>
+      <div class="form-group">
+      <label for="ConformPassword">Conform Password:</label>
+      <input type="password" class="form-control" placeholder="Conform Password" name="ConformPassword" ngModel>
+       </div>
+      <div class="form-group">
+      <label for="EmailId">EmailId:</label>
+      <input type="text" class="form-control" placeholder="Enter email" name="EmailId" ngModel>
+      </div>
+      <div class="form-group">
+      <label for="ContactNumber">ContactNumber:</label>
+      <input type="text" class="form-control" placeholder="Enter contact number" name="ContactNumber" ngModel> 
+      </div>
+      <div class="checkbox">
+       <label>
+        <input type="checkbox">Remember me
+       </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+    <div class="col-md-4 col-sm-4 col-xs-8"></div>
+  </div>
+  
+  </div>
+</div>
+{{frm.value | json}}
+
+css
+form-container{border: 0px solid #fff; padding: 10px 10px;margin-top: 10vh;
+    -webkit-box-shadow: -13px -8px 23px 1px rgba(40,127,184,1);
+    -moz-box-shadow: -13px -8px 23px 1px rgba(40,127,184,1);
+    box-shadow: -13px -8px 23px 1px rgba(40,127,184,1);
+
+} 
