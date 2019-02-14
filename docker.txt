@@ -1,0 +1,88 @@
+inside directory
+
+i created Docker file
+
+
+each images has maintainer
+
+
+
+docker build -t alodha100/myrepo:v1
+
+docker images
+
+docker run idofcontainer
+
+
+
+important commands
+-------------
+From->stars the docker file,defines ur base layer
+Maintainer->name of maintainer
+run ->crate new layer of ur image
+
+volume-->we can specify volume from host to container.
+
+network
+
+entrypoint-->we can use entire appliction,entry point ping.u have set ping.
+CMD->its doesnot create new layer.it is like run.we cannot run mutiple times.it is inside the container
+
+copy->copy local files into container,its doesnot create new layer.
+
+add-->quit similar to copy.copy your app folder container app folder.distinct features
+
+if u use add(2 distnict features)
+ add automatically un zip ur file myapp.zip 
+ using add u can download file from git or s3
+ENV->
+
+EXPOSE->to expose 89,to expose 67.
+
+
+
+
+
+
+
+docker Syntax Example
+---------------------
+making directory
+changing dirctory
+vi Docker
+i
+paste
+esc
+:wq!
+cat Docker
+
+mv Docker Dockerfile
+ ll
+
+docker build -t mymongo .   
+
+daemon is not running
+service docker start
+docker build -t mymongo . 
+  running
+ not running beause of some package
+it is complaing about key
+
+                 
+ll
+service docker status
+ more dockerfile   
+
+
+
+copy is not done  properly
+
+
+
+
+
+
+
+
+
+
