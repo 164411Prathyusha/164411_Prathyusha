@@ -1,0 +1,42 @@
+/*********************************************************************
+ * File                 : 1.4.txt
+ * Author Name          :  Prakash
+ * Desc                 : Program for checking whether the number is armstrong or not.
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+
+BEGIN
+	DECLARE num,digits,lastNum,newNum AS INTEGER
+	PROMPT "Enter a number" AND STORE IN num
+	INITIALZE digits TO 0
+	INITIALZE newNum TO 0
+	WHILE (num > 0)
+		num = num/10
+		++digits
+	END WHILE
+	WHILE (num > 0) THEN
+		lastNum = num/10
+		call calculate(num,digit)
+		num = lastNum	
+	END WHILE
+	IF (lastNum == num) THEN
+		PRINT "number is armstrong"
+	ELSE
+		PRINT "number is not armstrong"
+	END IF
+END
+
+/*********************************************************************
+* Module Name         : calculate()
+* Input Parameters    : num,digit
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 19/12/2018
+* Description         : calculating power 
+ *********************************************************************/
+
+
+SUB calculate(num,digit)
+	newNum =+pow(num,digits)
+END SUB

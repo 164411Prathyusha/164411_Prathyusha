@@ -1,0 +1,35 @@
+/*********************************************************************
+ * File                 : 1.5.txt
+ * Author Name          :  Prakash
+ * Desc                 : Program for coverting binary to decimal.
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+
+BEGIN
+	DECLARE binNum,decNum,new,base AS INTEGER
+	PROMPT "Enter a number" AND STORE IN binNum
+	WHILE (binNum > 0) THEN
+		call calculate(base,decNum)
+	END WHILE
+	
+END
+
+
+/*********************************************************************
+* Module Name         : calculate()
+* Input Parameters    : base,decNum
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 19/12/2018
+* Description         : Calculating net amount and unit consumed
+ *********************************************************************/
+
+
+SUB calculate(base,decNum)
+	INITIALIZE base TO 1,decNum TO 0
+	new = binNum%10
+	decNum = +(new * base)
+	base = base * 2	
+	binNum = binNum/10
+END SUB

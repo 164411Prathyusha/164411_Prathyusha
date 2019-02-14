@@ -1,0 +1,16 @@
+/*********************************************************************
+ * File                 : 1.3.txt
+ * Author Name          :  Prakash
+ * Desc                 : fibonacci series
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+BEGIN
+  DECLARE sum,num,i AS INTEGER
+  INITIALIZE sum TO 0
+  ACCEPT "enter number" AND STORE IN num
+  FOR i = 0 TO num 
+  sum = sum+i
+  PRINT sum
+  i++
+END

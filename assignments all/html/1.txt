@@ -1,0 +1,11 @@
+<!Doctype html>
+
+<h1 align="center"> <u>Resume</u></h1>
+
+<address>
+	Unit 55,SDF 11,
+	Seep7,Andher(E),
+	mumbai 400 096,
+	Mobile No: 98989898
+	<b>Email:</b> abc@patin.com
+</address>

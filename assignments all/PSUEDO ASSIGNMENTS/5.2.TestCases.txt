@@ -1,0 +1,19 @@
+
+S.NO.		TEST CASE			DECRIPTION		      INPUT	EXPECTED OUTPUT			ACTUAL OUTPUT		REMARKS
+
+   1		experience=0			Taken experience as 0		0		BLUE			BLUE			Valid input
+
+   2		experience=-1			Taken experience as -1		-1		BLUE			Abnormal Termination	negetive values not accepted
+				
+   3		experience=10			Taken experience as 10		10		RED			Abnormal Termination	not written program for 10 years experience
+
+   4		index=-12			Taken index as -12		-12		PERMANENT		Abnormal Termination	index value can not be negative
+
+   5		employeeType=visitor		Taken employeeType as 		visitor		PERMANENT(or)		Terminate abnormally	visitor type is not an valid employeeType
+						visitor						contractor
+
+   6		firstString=wow			Taken first string as		wow	     string is substring 	Terminate abnormally	Taken string is not a substring of second string
+						wow					     of second string
+  
+   7		secondString=0			Taken secondString as 0		0	     string is not substring 	Terminate abnormally	we have taken integer instead of string
+											     of secondString

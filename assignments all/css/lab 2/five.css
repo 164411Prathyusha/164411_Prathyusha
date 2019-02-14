@@ -1,0 +1,28 @@
+<html>
+body {
+		background-color:lightgray;
+		}
+h1
+{
+	font-family:calibri;
+	font-size:30px;
+	font-style:normal;
+	font-weight:bold;
+	text-decoration:underline;
+	text-align:center;
+	text-transform:capitalize;
+	text-indent:30px;
+	color:#ff0000;
+
+}
+p
+{
+	font-family:verdana;
+	font-size:20px;
+	font-style:italic;
+	text-transform:normal;
+	text-indent:30px;
+	color:#ff00ff;	
+	
+}
+</html>

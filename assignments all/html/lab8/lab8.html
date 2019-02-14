@@ -1,0 +1,115 @@
+<!Doctype html>
+<html>
+	<head></head>
+	<body>
+		<!--<form id="frmRegistration" name="frmRegistration" method="Post">-->
+		<h1>Candidate Information</h1>
+		<table border="1" style ="background-color:lightblue">
+			<tr>
+				<td>
+					<label> Name</label>
+				</td>
+				<td>
+				<input type="text" id="txtName" name="txtName" placeholder="Enter min 3 and maximum 20 alphabets" required autofocus/>
+		
+				</td>
+			</tr>
+			<tr>
+				<td><label>Enter  password</label></td>
+				<td>
+				<input type="password" id="txtPassword" name="txtPassword" required/>
+				</td>
+				
+			</tr>
+			<tr>
+				<td><label>Phone number</label></td>
+				<td>
+				<input type="number" id="txtnumber" name="txtnumber" required/>
+				</td>
+				
+			</tr>
+			<tr>
+				<td>
+				<label>Select Gender</label>
+				</td>
+				<td>
+				<input type="radio" id="rbtnGender_Male" name="rbtnGender" checked value="Male"/> Male
+				<input type="radio" id="rbtnGender_Female" name="rbtnGender" value="Female"/>Female
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<label required>Date of Birth</label>
+				</td>
+				<td>
+				<input type="date" id="txtDOB" name="txtDOB" required/>
+				</td>
+			</tr>
+			<tr>
+				<td><label>email</td>
+				<td>
+					<input type="email" required />
+				</td>
+			</tr>
+			<tr>
+				<td><label>Heighest Qualification</label></td>
+				<td>
+				<select id="ddlQuali" name="ddlQuali>
+				<option value="heighest Qualification">Heighst Qualification</option>
+				<option value="Heighest Qualification">Heighest Qualification</option>
+				<option value="B.tech">B.tech</option>
+				<option value="BE">BE</option>
+				<option value="PG">PG</option>
+				<option value="BSC">BSC</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label>Course Intersted in :</label></td>
+				<td>
+				<input type ="checkbox" name ="skills" value="HTML/DHTML" >HTML/DHTML 
+				<input type ="checkbox" name ="skills" value="Java" >Java 
+				<input type ="checkbox" name ="skills" value="CSS3" >CSS3
+				<input type ="checkbox" name ="skills" value="JQuery" >JQuery
+				<input type ="checkbox" name ="skills" value="Angular JS"> Angular JS
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<label>Comments</label>
+				</td>
+				<td>
+				<textarea id="txtarea_address" name="txtarea_address"/>
+				</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<label>UploadDegree/External Certificates:</label>
+				</td>
+				<td>
+				<input type="file">
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				<input type="submitInformation" id="btnRegister" name="btnRegister" value="SubmitInformation"/>
+			
+				<input type="clear" id="btnReset" name="btnReset" value="clear"/>
+				</td>
+			</tr>
+			
+			
+		</table>
+			
+				
+			
+			
+		</form>
+	</body>
+</html>

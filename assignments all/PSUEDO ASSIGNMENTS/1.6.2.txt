@@ -1,0 +1,24 @@
+/*********************************************************************
+ * File                 : 1.6.2.txt
+ * Author Name          :  Prakash
+ * Desc                 : Checking number is odd or even
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+
+ BEGIN
+     DECLARE num[10],AS INTEGER
+     PROMPT "Enter n value"AS STORE IN num[10]
+     FOR count 1 TO 10
+
+     IF(count%2==0)
+     DISPLAY Even number is "+num[count]"
+
+   ELSE 
+     DISPLAY Odd number is "+num[count]"
+
+     END IF
+     END FOR
+END	
+     
+     

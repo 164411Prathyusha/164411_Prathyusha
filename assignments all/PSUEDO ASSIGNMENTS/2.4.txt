@@ -1,0 +1,43 @@
+/*********************************************************************
+ * File                 : 2.4.txt
+ * Author Name          :  Prakash
+ * Desc                 : REFACTORING THE CODE
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+RECORD EMPLOYEE
+  DECLARE EmpID AS INTEGER
+  DECLARE employmentType AS STRING
+END RECORD
+
+BEGIN
+ DECLARE emp AS EMPLOYEE
+ DECLARE leaves,TotalLeaves,index AS INTEGER
+ FOR index = 1 TO 5
+   PROMT "Enter employee id" AND STORE IN emp.EmpID
+   PROMT "Enter employee TYPE" AND STORE IN emp.employmentType
+ END FOR
+ calculate(employmentType)
+ PRINT "EMPLOYEE ID:" emp.EmpID
+ PRINT "Total no of leaves are:"TotalLeaves  
+END
+
+/*********************************************************************
+* Module Name         : calculate()
+* Input Parameters    : employmentType
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 19/12/2018
+* Description         : calculating totalleaves
+ *********************************************************************/
+SUB calculate(employmentType)
+  FOR index = 1 TO 5
+    IF(employmentType == 'PERMANENT') THEN
+       leaves=2
+      ELSEIF(employmentType == 'CONTRACT') THEN
+         leaves=1
+    END IF
+  END FOR
+  TotalLeaves=leaves*12
+ RETURN TotalLeaves
+END SUB

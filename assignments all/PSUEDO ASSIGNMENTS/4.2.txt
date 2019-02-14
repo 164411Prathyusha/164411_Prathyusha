@@ -1,0 +1,54 @@
+/*********************************************************************
+ * File                 : 4.2.txt
+ * Author Name          :  Prakash
+ * Desc                 : number of leaves of an employee according to employee type with exception handlings.
+ * Version              : 1.0
+ * Last Modified Date   : 21/12/2018
+ *********************************************************************/
+RECORD EMPLOYEE
+	DECLARE EmpId AS INTEGER
+	DECLARE employmentType AS STRING
+END RECORD
+
+BEGIN
+	DECLARE emp AS EMPLOYEE
+	DECLARE leaves,totalLeaves,index AS INTEGER
+	FOR index = 1 TO 5
+		PROMPT "Enter employee id" AND STORE IN emp.empId
+		PROMPT "Enter employee TYPE" AND STORE IN emp.employmentType
+ 	END FOR
+	CALL Type()
+	PRINT "EMPLOYEE ID:" emp.EmpID
+	PRINT "Total no of leaves are:"TotalLeaves 
+EXCEPTION 
+	WHEN employeeTypeNotFound THEN
+		PRINT errormessage //Errormessage returned from exception
+	WHEN OTHERS THEN
+		PRINT errormessage 
+END
+
+
+/*********************************************************************
+* Module Name         : employmentType()
+* Input Parameters    : lastReading,currentReading
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 21/12/2018
+* Description         : checking employement type
+ *********************************************************************/
+SUB Type(employementType)
+	FOR index = 1 TO 5
+		IF(employmentType == 'PERMANENT') THEN
+			leaves=2
+			
+		ELSE-IF(employmentType == 'CONTRACT') THEN
+			leaves=1
+			
+		END IF
+	END FOR
+          TotalLeaves=leaves*12
+	RETURN TotalLeaves
+END SUB
+
+
+

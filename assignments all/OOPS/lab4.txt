@@ -1,0 +1,13 @@
+/***********************1.1******************************/
+
+abstract class		:Messages
+Abstract Methods	:abstact void senderDetails();
+			 abstact void receiverDetails();
+			 abstact void content();
+			 abstact void size();
+
+
+concrete class		: TextMessage():Messages
+			  AudioMessage():Messages
+			  VoiceMessage():Messages
+			  MultimediaMessage():Messages

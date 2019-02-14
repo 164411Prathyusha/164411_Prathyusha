@@ -1,0 +1,19 @@
+
+	img[title]
+	{
+		border:1px solid #000;
+	}
+	img[width]
+	{
+		border:1px solid #000;
+	}
+	img[title|="title-1"]{
+	border:1px solid #000;
+	}
+	img[title|="title-2"]{
+	border:1px solid #000;
+	}
+	img[title|="title-3"]{
+	border:1px solid #000;
+	}
+

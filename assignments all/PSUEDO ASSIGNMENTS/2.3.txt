@@ -1,0 +1,43 @@
+/*********************************************************************
+ * File                 : 2.3.txt
+ * Author Name          :  Prakash
+ * Desc                 : counting number of unique number in array
+ * Version              : 1.0
+ * Last Modified Date   : 20/12/2018
+ *********************************************************************/
+
+
+BEGIN
+	DECLARE arr[10], index AS INTEGER
+	FOR index 0 TO 9
+	PROMPT "Enter array elements" AND STORE IN arr[index]
+	END FOR
+		PRINT "Number of unique elements" +Unique[index]
+END
+
+/*********************************************************************
+* Module Name         : Unique()
+* Input Parameters    : array
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 20/12/2018
+* Description         : checking unique number
+ *********************************************************************/
+SUB Unique( arr[10])
+	DECLARE uniq=0, count index, index1 AS INTEGER
+	FOR index 0 TO 9
+		count=0
+	FOR index1 0 TO 9
+		IF arr[index]==[index1]
+		count++
+		END IF
+		IF (count==2)
+		BREAK
+		END IF
+	END FOR
+	IF (count==1)
+	uniq++
+	END IF
+	END FOR
+		RETURN uniq
+END SUB		

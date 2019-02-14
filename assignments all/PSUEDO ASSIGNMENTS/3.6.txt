@@ -1,0 +1,76 @@
+/*********************************************************************
+ * File                 : 3.6.txt
+ * Author Name          :  Prakash
+ * Desc                 : finding the position of element
+ * Version              : 1.0
+ * Last Modified Date   : 21/12/2018
+ *********************************************************************/
+BEGIN
+  DECLARE array AS INTEGER ARRAY
+  DECLARE element,position AS INTEGER
+  DECLARE i AS INTEGER
+  PRINT "ENTER ELEMENT TO BE SEARCHED" AND STORE IN element
+  FOR i=0 to 4
+    STORE IN array[i]
+  END FOR
+  sortedarray=Sort(array)
+  position =Search(sortedarrray,i)
+  PRINT "THE ELEMENT IS AT POSITION: "+position
+END
+/*********************************************************************
+* Module Name         : Sort()
+* Input Parameters    : array
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 21/12/2018
+* Description         : Sorting array
+ *********************************************************************/
+SUB Sort(array)
+  DECLARE min,i,j AS INTEGER
+  FOR i=0 TO 4
+    FOR j=0 TO 4-i
+      IF array[j]>array[j+1] THEN
+        Swap(array[j],array[j+1])
+      END IF
+    END FOR
+  RETURN array
+END SUB
+/*********************************************************************
+* Module Name         : Swap()
+* Input Parameters    : element1,element2
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 21/12/2018
+* Description         : Calculating net amount and unit consumed
+ *********************************************************************/
+SUB Swap(element1,element2)
+ DECLARE temp AS INTEGER  
+   IF element1 > element2 THEN
+      temp = element1
+      element1 = element2
+      element2 = temp
+   END IF
+END SUB
+/*********************************************************************
+* Module Name         : Search()
+* Input Parameters    : array,element
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 21/12/2018
+* Description         : Searching element
+ *********************************************************************/
+SUB Search(array,element)
+  DECLARE mid,lower,upper AS INTEGER
+  INITIALIZE mid TO 2
+  INITIALIZE lower TO 0
+  INITIALIZE upper TO 4
+  WHILE lower < upper
+    IF array[mid] == element
+      RETURN mid
+     ELSEIF array[mid]>element
+        upper = mid-1
+       ELSE
+         lower = mid+1
+    END IF
+ END WHILE
+END SUB

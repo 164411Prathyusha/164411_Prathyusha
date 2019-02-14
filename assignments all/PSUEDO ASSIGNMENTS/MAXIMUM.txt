@@ -1,0 +1,23 @@
+/*********************************************************************
+ * File                 : MAXIMUM.txt
+ * Author Name          :  Prakash
+ * Desc                 : FIND OUT MAXIMUM IN ARRAY
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+BEGIN
+ DECLARE numbers[10] AS INTEGER ARRAY
+ DECLARE max AS INTEGER
+ INITIALIZE max TO 0
+ PROMPT “Enter 10 numbers”
+ FOR index=1 TO 10
+   ACCEPT numbers[index]
+ END FOR
+ max=numbers[0]
+ FOR index=1 TO 10
+    IF numbers[index] > max THEN
+       max=numbers[index]
+    END IF
+ END FOR  
+ PRINT max
+END 

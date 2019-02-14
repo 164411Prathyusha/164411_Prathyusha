@@ -1,0 +1,27 @@
+/*********************************************************************
+ * File                 : 1.2.txt
+ * Author Name          :  Prakash
+ * Desc                 : colour based on year of joining 
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+
+BEGIN
+  DECLARE YOE AS INTEGER
+  ACCEPT "ENTER YEAR OF EXPERIENCE" AND STORE IN YOE
+  IF(0<=YOE<3) THEN
+    PRINT "BLUE"
+  END IF
+
+  IF(3<=YOE<5) THEN
+    PRINT "GREY"
+  END IF 
+  
+  IF(5<=YOE<10) THEN
+    PRINT "YELLOW"
+  END IF
+  
+  IF(YOE>=10) THEN
+    PRINT "RED"
+  END IF
+END

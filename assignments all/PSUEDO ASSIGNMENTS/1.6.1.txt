@@ -1,0 +1,26 @@
+/*********************************************************************
+ * File                 : 1.6.1.txt
+ * Author Name          :  Prakash
+ * Desc                 : Finding smallest number
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+
+  BEGIN
+     DECLARE number[10] AS INTEGER ARRAY
+     DECLARE min AS INTEGER
+     INITIALIZE min TO 0
+        PROMPT "Enter 10 number"
+    FOR index 1 TO 10
+         ACCEPT numbers[index]
+    END FOR 
+    min=number[0]
+    FOR index=1 TO 10
+        IF numbers[index]<min THEN
+           min=numbers[index]
+        END IF
+      END FOR
+      PRINT min
+  END
+
+            

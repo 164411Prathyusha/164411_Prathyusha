@@ -1,0 +1,18 @@
+/* Name : totalprice.txt
+   Author Name : Prakash
+   Description : To calculate total price of a product including tax.
+   Date : 21/12/18.
+*/ 
+
+SUB CALCULATE
+	DECLARE totalPrice AS INTEGER
+	CONSTANT taxRate AS .56
+	totalPrice = price*taxRate
+END
+BEGIN	
+	PRINT "Enter price of product" AND STORE IN price
+	CALL CALCULATE
+	PRINT "Total price of product is": +totalPrice
+END
+	
+	

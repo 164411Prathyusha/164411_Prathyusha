@@ -1,0 +1,195 @@
+/****************************************************************
+	Name        : 1.1txt
+   	Author Name :  Prakash
+   	Description : Electricity bill.
+   	Date        : 20/12/18.
+****************************************************************/ 
+RECORD User
+  DECLARE UID,lastReading,currentReading AS INTEGER
+  DECLARE Uname AS STRING
+  DECLARE unit_Consumed,netAmount AS FLOAT
+END RECORD 
+
+SUB CALCULATE(lastReading,currentReading)
+   CONSTANT Charge=100  
+   unit_Consumed = (lastReading)-(currentReading)
+   netAmount = unit_Consumed*1.15+Charge
+   RETURN unit_Consumed
+   RETURN netAmount
+END SUB
+
+BEGIN
+  ACCEPT User.UID,User.Uname,User.lastReading,User.currentReading
+  CALCULATE(lastReading,currentReading)
+  PRINT "User Name:" +Uname
+  PRINT "User ID:" +UID
+  PRINT "UNIT CONSUMED:" +unit_Consumed
+  PRINT "NET AMOUNT:" +netAmount
+END
+
+
+/****************************************************************
+	Name        : 1.2.txt
+   	Author Name :  Prakash
+   	Description : Tag color.
+   	Date        : 20/12/18.
+****************************************************************/
+BEGIN
+  DECLARE YOE AS INTEGER
+  ACCEPT "ENTER YEAR OF EXPERIENCE" AND STORE IN YOE
+  IF(0<=YOE<3) THEN
+    PRINT "BLUE"
+  END IF
+
+  IF(3<=YOE<5) THEN
+    PRINT "GREY"
+  END IF 
+  IF(5<=YOE<10) THEN
+    PRINT "YELLOW"
+  END IF
+  IF(YOE>=10) THEN
+    PRINT "RED"
+  END IF
+END
+
+
+/****************************************************************
+	Name        : 1.3.txt
+   	Author Name : Prakash
+   	Description : Mathemtical series.
+   	Date        : 20/12/18.
+****************************************************************/
+BEGIN
+  DECLARE sum,num,i AS INTEGER
+  INITIALIZE sum TO 0
+  ACCEPT "enter number" AND STORE IN num
+  FOR i = 0 TO num 
+  sum = sum+i
+  PRINT sum
+  i++
+END
+
+
+/****************************************************************
+	Name        : 1.4.txt
+   	Author Name :  Prakash
+   	Description : Armstrong number.
+   	Date        : 20/12/18.
+****************************************************************/
+
+SUB calculate
+	newNum =+pow(num,digits)
+END SUB
+
+BEGIN
+	DECLARE num,digits,lastNum,newNum AS INTEGER
+	PROMPT "Enter a number" AND STORE IN num
+	INITIALZE digits TO 0
+	INITIALZE newNum TO 0
+	WHILE (num > 0)
+		num = num/10
+		++digits
+	END WHILE
+	WHILE (num > 0) THEN
+		lastNum = num/10
+		call calculate()
+		num = lastNum	
+	END WHILE
+	IF (lastNum == num) THEN
+		PRINT "number is armstrong"
+	ELSE
+		PRINT "number is not armstrong"
+	END IF
+END
+
+
+/****************************************************************
+	Name        : 1.5.txt
+   	Author Name :  Prakash
+   	Description : Binary to Decimal
+   	Date        : 21/12/18.
+****************************************************************/
+
+SUB calculate
+	INITIALIZE base TO 1,decNum TO 0
+	new = binNum%10
+	decNum = +(new * base)
+	base = base * 2	
+	binNum = binNum/10
+END SUB
+
+BEGIN
+	DECLARE binNum,decNum,new,base AS INTEGER
+	PROMPT "Enter a number" AND STORE IN binNum
+	WHILE (binNum > 0) THEN
+		call calculate
+	END WHILE
+	
+END
+
+
+/****************************************************************
+	Name        : 1.6.1.txt
+   	Author Name :  Prakash
+   	Description : Smallest number.
+   	Date        : 21/12/18.
+****************************************************************/
+  BEGIN
+     DECLARE number[10] AS INTEGER ARRAY
+     DECLARE min AS INTEGER
+     INITIALIZE min TO 0
+        PROMPT "Enter 10 number"
+    FOR index 1 TO 10
+         ACCEPT numbers[index]
+    END FOR 
+    min=number[0]
+    FOR index=1 TO 10
+        IF numbers[index]<min THEN
+           min=numbers[index]
+        END IF
+      END FOR
+      PRINT min
+  END
+
+            
+/****************************************************************
+	Name        : 1.6.2.txt
+   	Author Name :  Prakash
+   	Description : Odd or Even.
+   	Date        : 21/12/18.
+****************************************************************/
+ BEGIN
+     DECLARE num[10],AS INTEGER
+     PROMPT "Enter n value"AS STORE IN num[10]
+     FOR count 1 TO 10
+
+     IF(count%2==0)
+     DISPLAY Even number is "+num[count]"
+
+   ELSE 
+     DISPLAY Odd number is "+num[count]"
+
+     END IF
+     END FOR
+END	
+   
+  
+/****************************************************************
+	Name        : 1.7.txt
+   	Author Name :  Prakash
+   	Description : Total price of product including all taxes.
+   	Date        : 21/12/18.
+****************************************************************/
+
+SUB CALCULATE
+	DECLARE totalPrice AS INTEGER
+	CONSTANT taxRate AS .56
+	totalPrice = price*taxRate
+END
+BEGIN	
+	PRINT "Enter price of product" AND STORE IN price
+	CALL CALCULATE
+	PRINT "Total price of product is": +totalPrice
+END
+	
+	     

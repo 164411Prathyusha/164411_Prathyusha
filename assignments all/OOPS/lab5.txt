@@ -1,0 +1,5 @@
+classes		: Employee[super class]
+		  Regularemployee[sub class1]
+		  Contractemployee[sub class2]
+static variable	: PF=12%
+static member function :leaves()

@@ -1,0 +1,13 @@
+/*********************************************************************
+ * File                 : DIFFERENCE.txt
+ * Author Name          :  Prakash
+ * Desc                 : SUBTRACTION OF TWO NUMBERS
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+BEGIN
+  DECLARE num1, num2 AS INTEGER
+  PROMPT "Enter 2 numbers" AND STORE IN num1, num2
+  PRINT "The result is”, num1-num2;	
+END
+

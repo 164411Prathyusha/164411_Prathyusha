@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		div
+		{
+			border : 2px solid black;
+			width : 300px;
+			height :350px;	
+		}	
+		*{
+			box-sizing: border-box;
+			box-color :blue;
+		}
+		body
+		{
+			font-family: Arial, Helvetica, sans-serif;
+			margin : 2
+		}
+		/* Style the header */
+		header
+		{
+			padding: 20px;
+			text-align: center;
+			font-size: 25px;
+			color: black;
+		}
+		/* Create two columns/boxes that floats next to each other */
+		nav
+		{
+			float: left;
+			width: 30%;
+			height: 400px; /* only for demonstration, should be removed */
+			padding: 20px;
+		}
+		article 
+		{
+			float: left;
+			padding: 15px;
+			width: 40%;
+			background-color: white;
+			height: 200px; /* only for demonstration, should be removed */
+		}
+		/* Clear floats after the columns */
+		section:after
+		{
+			content: "";
+			display: table;
+			clear: both;
+		}
+		/* Style the footer */
+		footer
+		{
+			padding: 10px;
+			text-align: center;
+			text-color: black;
+		}
+		.outer
+		{
+			border-color : DodgerBlue;
+		}
+		@media (max-width: 600px)
+		{
+			nav, article
+			{
+				width: 100%;
+				height: auto;
+			}
+		}
+	</style>
+</head>
+<body>
+	<table class="outer" border="10">
+	<tr>
+		<td class="header" colspan="4" align="center">
+			<h3><b>University and Learning</b></h3>
+		</td>
+	</tr>
+	<tr>
+		<section>
+			<td>
+				<nav>
+					<div>
+						<h3 style ="text-align : center">University Course Catalog</h3>
+							<ul> 
+								<li> JEE
+									<ul type = "circle">
+										<li> Core Java </li>
+										<li> Web Components </li>
+										<li> Frameworks </li>
+									</ul>
+								</li>
+								<li> .Net
+									<ul type = "circle">
+										<li> SQL Server </li>
+										<li> C# </li>
+										<li> Linq </li>
+									</ul>
+								</li>
+								<li> MainFrame</li>
+								<li> BI </li>
+								<li> RDBMS
+							<ul type = "circle">
+								<li> C </li>
+								<li> Unix </li>
+								<li> Oracle </li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</td>
+		<td>
+			<article style ="padding-bottom : 100px">
+				<form method = "post" action ="" >
+					<div style = "padding : 50px;width : 350px;height:200px;background-color : DodgerBlue;border: 4px solid red;border-radius : 50px; ">
+						<table>
+							<tr><td><label>USERNAME<label><input type ="text" name = "Username"/></td></tr>
+							<tr><td><label>PASSWORD<label><input type = "text" name = "password"/></tr>
+							<tr><td><input type="Submit" value="Submit" ></td></tr>
+						</table>
+					</div>
+				</form>
+			</article>
+		</td>
+	</section>
+	</tr>
+	<tr>
+		<td align="center"class="footer" colspan="4">
+			<h3><b>Copyright@IGATE2012</b></h3></td>
+	</tr>
+	</table>
+</body>
+</html>
+

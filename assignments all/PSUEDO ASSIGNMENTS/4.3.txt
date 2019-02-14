@@ -1,0 +1,37 @@
+/*********************************************************************
+ * File                 : 4.3.txt
+ * Author Name          :  Prakash
+ * Desc                 : Calculating total price
+ * Version              : 1.0
+ * Last Modified Date   : 21/12/2018
+ *********************************************************************/
+
+ BEGIN
+    DECLARE price,totalPrice AS FLOAT
+    DECLARE Quantity AS INTEGER
+    CONSTANT Tax Rate=0.56
+    PROMPT "Enter The Price of the Product" AS STORE IN Price
+    PROMPT "Enter The Quantity of the Product" AS STORE IN Quantity
+    totalPrice=calculate(price,quantity)
+    PRINT "Total Price is:"+totalPrice
+    EXCEPTION
+        WHEN PriceNotValid THEN
+          PRINT Error message
+        WHEN OTHERS THEN
+          PRINT Error message
+    END
+
+*********************************************************************
+* Module Name         : calculate()
+* Input Parameters    : price,quantity
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 21/12/2018
+* Description         : Calculating total price
+ *********************************************************************/
+SUB calculate(price,quantity)
+IF(Price>=1)
+    TotalPrice =Price*Quantity*0.56
+ELSE
+  RAISE PriceNotValid("Total Price does not Valid"+Price)
+END SUB

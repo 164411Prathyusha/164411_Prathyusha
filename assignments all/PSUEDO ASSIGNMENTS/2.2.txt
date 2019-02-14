@@ -1,0 +1,28 @@
+/*********************************************************************
+ * File                 : 2.2.txt
+ * Author Name          :  Prakash
+ * Desc                 : sum of digits of a number
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+BEGIN
+  DECLARE NUM AS INTEGER
+  sum(NUM)
+END
+
+/*********************************************************************
+* Module Name         : sum()
+* Input Parameters    : NUM
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 19/12/2018
+* Description         : FINDING SUM
+ *********************************************************************/
+SUB sum(NUM)
+  DECLARE REM,SUM AS INTEGER
+  WHILE NUM ! = 0  
+     REM = NUM MODULO 10
+     SUM = SUM+REM
+  END WHILE
+  RETURN SUM
+END SUB

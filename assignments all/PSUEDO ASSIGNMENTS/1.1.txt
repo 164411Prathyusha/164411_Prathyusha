@@ -1,0 +1,41 @@
+/*********************************************************************
+ * File                 : 1.1.txt
+ * Author Name          : Prakash
+ * Desc                 : Calculating net amount and unit consumed
+ * Version              : 1.0
+ * Last Modified Date   : 19/12/2018
+ *********************************************************************/
+
+RECORD User
+  DECLARE UID,lastReading,currentReading AS INTEGER
+  DECLARE Uname AS STRING
+  DECLARE unit_Consumed,netAmount AS FLOAT
+END RECORD 
+
+BEGIN
+  ACCEPT User.UID,User.Uname,User.lastReading,User.currentReading
+  calculate(lastReading,currentReading)
+  PRINT "User Name:" +Uname
+  PRINT "User ID:" +UID
+  PRINT "UNIT CONSUMED:" +unit_Consumed
+  PRINT "NET AMOUNT:" +netAmount
+END
+
+/*********************************************************************
+* Module Name         : calculate()
+* Input Parameters    : lastReading,currentReading
+* Return Type         : INTEGER
+* Author              :  Prakash
+* Creation Date       : 19/12/2018
+* Description         : Calculating net amount and unit consumed
+ *********************************************************************/
+
+SUB calculate(lastReading,currentReading)
+   CONSTANT Charge=100  
+   unit_Consumed = (lastReading)-(currentReading)
+   netAmount = unit_Consumed*1.15+Charge
+   RETURN unit_Consumed
+   RETURN netAmount
+END SUB
+
+
