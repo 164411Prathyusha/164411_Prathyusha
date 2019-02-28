@@ -1,0 +1,19 @@
+﻿<Window x:Class="EntityDtaModel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EntityDtaModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <DataGrid Name="dgStudent" HorizontalAlignment="Left" Height="231" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" Width="190" Height="53" Click="Button_Click"/>
+        <TextBox Name="txt_SearchStudent" HorizontalAlignment="Left" Height="57" Margin="10,246,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="190" />
+        <Button Content="Add" HorizontalAlignment="Left" Margin="226,356,0,0" VerticalAlignment="Top" Width="192" Height="53" Click="Button_Click_1"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="454,356,0,0" VerticalAlignment="Top" Width="191" Height="53" Click="Button_Click_2"/>
+        <Button Content="Display" HorizontalAlignment="Left" Margin="246,246,0,0" VerticalAlignment="Top" Width="172" Height="57" Click="Button_Click_3"/>
+
+    </Grid>
+</Window>
