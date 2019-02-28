@@ -1,0 +1,776 @@
+  DAY ----  1
+===========================================================
+[?27-?02-?2019 14:51]  Kumar, Ashutosh:  
+hi
+ 
+[?27-?02-?2019 14:51]  Lodha, Ajay Kumar:  
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm 
+ 
+ 
+[?27-?02-?2019 14:58]  Lodha, Ajay Kumar:  
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+ 
+[?27-?02-?2019 14:58]  KUMAR, VIJAY:  
+3333333
+ 
+[?27-?02-?2019 14:58]  Patil, Birappa:  
+UnicodeDecodeError:  
+ 
+[?27-?02-?2019 15:03]  Lodha, Ajay Kumar:  
+cd /etc/yum.repos.d
+ll
+cat epel.repo
+ 
+[?27-?02-?2019 15:04]  Patil, Birappa:  
+ yum --enablerepo=epel install ansible 
+ 
+[?27-?02-?2019 15:12]  Lodha, Ajay Kumar:  
+hostname master
+ifconfig eth0
+take the ip address
+vi /etc/hosts
+ 
+[?27-?02-?2019 15:14]  Lodha, Ajay Kumar:  
+vi /etc/sysconfig/network
+ 
+[?27-?02-?2019 15:40]  Lodha, Ajay Kumar:  
+No Title 
+Steps to install and configure Ansible 
+========================================
+Launch 2 EC2 instances in the same VPC (same subnet or differnt subnet will be fine but same vpc) 
+Tag one instance as master and the other as client
+For RHEL 7
+==============
+1. wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+For Rhel 6
+===============
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm 
+rpm -ivh epel-release-latest-7.noarch.rpm
+yum --enablerepo=epel install ansible
+2. Create entries for your clients in the /etc/hosts file 
+vi /etc/hosts 
+<private ip of master > <name of the master> 
+<private ip of the client> < name of the client> 
+esc :wq! 
+
+3. Allow password less authentication from master to client
+a) in the ansible client system, open the file /etc/ssh/sshd_config 
+vi /etc/ssh/sshd_config , and change the value of "PasswordAuthentication no" to 
+"PasswordAuthentication yes". 
+also set the value "PermitRootLogin no"
+to "PermitRootLogin yes"
+Save the file and exits 
+#service sshd restart 
+Then, set a password for the root user. run the passwd command as root 
+#passwd 
+
+b) In the ansible master server run the below command to create the ssh keys ( In this example we are using root account only) 
+#ssy-keygen (select default values) 
+This command will create the ssh key pair for the root user
+
+c) from the master server try to ssh into the client server 
+#ssh root@<private ip of the client> 
+it should ask for the password 
+d) Run the command to set the password less authentication. 
+#ssh-copy-id -i root@<client IP> 
+if the command is successfull, ssh will not ask for the password next time. 
+
+4. Set the /etc/ansible/hosts file with the correct entry of all the client servers. 
+
+[web]
+172.31.19.190
+[db]
+172.31.34.95
+5. That's it. Ansible is ready to be used. Try the below commands 
+
+ansible all -m ping
+ansible all -m shell "uname -a"
+ansible all -m yum -a "name=httpd state=present"
+ansible all -m shell -a "/sbin/service httpd start"
+
+
+
+ 
+ 
+[?27-?02-?2019 15:56]  Lodha, Ajay Kumar:  
+ansible all -m ping
+ansible all -m shell "uname -a"
+ansible all -m yum -a "name=httpd state=present"
+ansible all -m shell -a "/sbin/service httpd start" 
+ 
+[?27-?02-?2019 15:58]  Lodha, Ajay Kumar:  
+No Title 
+ansible all --list-hosts
+  hosts (2):
+    localhost
+    192.168.0.11
+
+=====================================
+ansible all -m ping
+localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+192.168.0.11 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+=====================================
+ansible centos -a 'yum update -y'
+To update all centos servers
+======================================
+Gathering facts
+ansible all -m setup
+ansible all -m setup |grep -i uptime
+ansible all -m setup |grep -i address
+ansible all -m setup |grep -i ipv4
+=====================================
+ansible localhost -m command  -a "uptime"
+localhost | SUCCESS | rc=0 >>
+ 17:11:02 up  2:19,  2 users,  load average: 0.00, 0.00, 0.00
+[root@server ansible]#
+[root@server ansible]#
+[root@server ansible]# ansible localhost -m shell  -a "uptime"
+localhost | SUCCESS | rc=0 >>
+ 17:11:09 up  2:19,  2 users,  load average: 0.15, 0.03, 0.01
+=====================================
+ansible -i hosts all -m command -a 'hostname'
+localhost | SUCCESS | rc=0 >>
+server
+192.168.0.11 | SUCCESS | rc=0 >>
+client1
+=======================================
+[root@server ansible]# ansible -i hosts all -m command -a 'hostname' -u root
+localhost | SUCCESS | rc=0 >>
+server
+192.168.0.11 | SUCCESS | rc=0 >>
+client1
+[root@server ansible]#
+[root@server ansible]# ansible -i hosts all -m command -a 'hostname' -u centos
+localhost | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).\r\n",
+    "unreachable": true
+}
+192.168.0.11 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).\r\n",
+    "unreachable": true
+}
+=================================================
+User module
+===================
+ansible -i hosts all -m user -a "name=admin password=<admin123>" ==> this is not crypto pass
+ansible -i inventory selection -m user -a 'name=username state=absent'
+ansible -i hosts all -m user -a "name=admin state=absent" -u root
+ansible -i hosts all -m user -a "name=admin state=absent"
+ansible -i hosts localhost -m user -a "name=admin"
+=======================================================
+copy module
+======================
+Usage : ansible -i inventory selection -m copy -a "src=file_name dest=file path to save"
+ansible -i hosts all -m copy -a "src=test.sh dest=/root/"
+file module 
+==================
+ansible -i hosts production -m file -a "dest=/root/test.sh mode=600 owner=admin group=admin"
+================================================
+Creating a folder 
+==================
+ansible -i hosts all -m file -a "dest=/root/ansible mode=755 owner=admin group=admin state=directory" -u root
+==============================================
+Managing packages 
+===================
+ansible -i hosts localhost -m yum -a "name=vsftpd state=present"
+value of state must be one of: absent, installed, latest, present, removed, got: restart"
+to update the package 
+=======================
+ansible -i hosts all -m yum -a "name=httpd state=latest"
+=============================================== 
+Removing the packages 
+=========================
+ansible -i hosts all -m yum -a "name=httpd state=absent"
+Managing services 
+==============================
+Ansible provides the module service to attain that. We can use this module to enable on-boot and start/stop/restart services. Please see the examples for each case.
+
+
+
+DAY- 2
+=========================================================================================
+
+
+[?28-?02-?2019 14:32]  Lingala, Poojitha:  
+in master or in controller
+============
+
+1. ssh-keygen 
+
+press enter 3 times 
+
+2. go to the .ssh directory of the user. For root the dir is 
+
+cd /root/.ssh 
+
+3. Copy the .pub file which is the public key of the root user 
+
+=====================================================================
+
+Node configuration
+===================
+
+1. Go to the same location of the root user's home directory 
+
+cd /root/.ssh 
+
+2. Create a file if it is not already there
+
+vi authorized_keys 
+
+3. Paste the contents of the .pub file into this file 
+
+Note - Remember, we have to modify the /etc/ssh/sshd_config file and enable password authentication and root user access. 
+Save the file after modification and restart sshd 
+
+#service sshd restart  
+ 
+[?28-?02-?2019 14:33]  Lingala, Poojitha:  
+[?2/ 
+[?2/?28/?2019 11:05 AM] Bawgi, Arpita: 
+in master or in controller
+============
+
+1. ssh-keygen 
+
+press enter 3 times 
+
+2. go to the .ssh directory of the user. For root the dir is 
+
+cd /root/.ssh 
+
+3. Copy the .pub file which is the public key of the root user 
+
+=====================================================================
+
+Node configuration
+===================
+
+1. Go to the same location of the root user's home directory 
+
+cd /root/.ssh 
+
+2. Create a file if it is not already there
+
+vi authorized_keys 
+
+3. Paste the contents of the .pub file into this file 
+
+Note - Remember, we have to modify the /etc/ssh/sshd_config file and enable password authentication and root user access. 
+Save the file after modification and restart sshd 
+
+#service sshd restart   
+ 
+[?28-?02-?2019 14:33]  Lingala, Poojitha:  
+[?2/ 
+[?2/?28/?2019 11:05 AM] Bawgi, Arpita: 
+in master or in controller
+============
+
+1. ssh-keygen 
+
+press enter 3 times 
+
+2. go to the .ssh directory of the user. For root the dir is 
+
+cd /root/.ssh 
+
+3. Copy the .pub file which is the public key of the root user 
+
+=====================================================================
+
+Node configuration
+===================
+
+1. Go to the same location of the root user's home directory 
+
+cd /root/.ssh 
+
+2. Create a file if it is not already there
+
+vi authorized_keys 
+
+3. Paste the contents of the .pub file into this file 
+
+Note - Remember, we have to modify the /etc/ssh/sshd_config file and enable password authentication and root user access. 
+Save the file after modification and restart sshd 
+
+#service sshd restart  
+[?2/?28/?2019 11:39 AM] Naik, Sindhu: 
+Steps to install and configure Ansible  
+Steps to install and configure Ansible 	
+ 	======================================== 	
+ 	 	
+ 	Launch 2 EC2 instances in the same VPC (same subnet or differnt subnet will be fine but same vpc) 	
+ 	Tag one instance as master and the other as client 	
+ 	 	
+ 	For RHEL 7 	
+ 	============== 	
+ 	1. wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 	
+ 	 	
+ 	For Rhel 6 	
+ 	=============== 	
+ 	 	
+ 	yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm 	
+ 	 	
+ 	rpm -ivh epel-release-latest-7.noarch.rpm 	
+ 	yum --enablerepo=epel install ansible 	
+ 	 	
+ 	2. Create entries for your clients in the /etc/hosts file 	
+ 	 	
+ 	vi /etc/hosts 	
+ 	<private ip of master > <name of the master> 	
+ 	<private ip of the client> < name of the client> 	
+ 	 	
+ 	esc :wq! 	
+ 	 	
+ 	 	
+ 	3. Allow password less authentication from master to client 	
+ 	 	
+ 	a) in the ansible client system, open the file /etc/ssh/sshd_config 	
+ 	 	
+ 	vi /etc/ssh/sshd_config , and change the value of "PasswordAuthentication no" to 	
+ 	 	
+ 	"PasswordAuthentication yes". 	
+ 	 	
+ 	also set the value "PermitRootLogin no" 	
+ 	 	
+ 	to "PermitRootLogin yes" 	
+ 	Save the file and exits 	
+ 	 	
+ 	#service sshd restart 	
+ 	 	
+ 	Then, set a password for the root user. run the passwd command as root 	
+ 	 	
+ 	#passwd 	
+ 	 	
+ 	 	
+ 	b) In the ansible master server run the below command to create the ssh keys ( In this example we are using root account only) 	
+ 	 	
+ 	#ssy-keygen (select default values) 	
+ 	 	
+ 	This command will create the ssh key pair for the root user 	
+ 	 	
+ 	 	
+ 	c) from the master server try to ssh into the client server 	
+ 	 	
+ 	#ssh root@<private ip of the client> 	
+ 	 	
+ 	it should ask for the password 	
+ 	 	
+ 	d) Run the command to set the password less authentication. 	
+ 	 	
+ 	#ssh-copy-id -i root@<client IP> 	
+ 	 	
+ 	if the command is successfull, ssh will not ask for the password next time. 	
+ 	 	
+ 	 	
+ 	4. Set the /etc/ansible/hosts file with the correct entry of all the client servers. 	
+ 	 	
+ 	 	
+ 	[web] 	
+ 	172.31.19.190 	
+ 	[db] 	
+ 	172.31.34.95 	
+ 	 	
+ 	5. That's it. Ansible is ready to be used. Try the below commands 	
+ 	 	
+ 	 	
+ 	ansible all -m ping 	
+ 	ansible all -m shell "uname -a" 	
+ 	ansible all -m yum -a "name=httpd state=present" 	
+ 	ansible all -m shell -a "/sbin/service httpd start"	  
+ 
+[?28-?02-?2019 14:33]  Lingala, Poojitha:  
+ansible all --list-hosts  
+ansible all --list-hosts
+  hosts (2):
+    localhost
+    192.168.0.11
+
+
+=====================================
+ansible all -m ping
+localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+192.168.0.11 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+=====================================
+ansible centos -a 'yum update -y'
+
+To update all centos servers
+
+======================================
+Gathering facts
+
+ansible all -m setup
+ansible all -m setup |grep -i uptime
+ansible all -m setup |grep -i address
+ansible all -m setup |grep -i ipv4
+
+=====================================
+ansible localhost -m command  -a "uptime"
+localhost | SUCCESS | rc=0 >>
+ 17:11:02 up  2:19,  2 users,  load average: 0.00, 0.00, 0.00
+
+[root@server ansible]#
+[root@server ansible]#
+[root@server ansible]# ansible localhost -m shell  -a "uptime"
+localhost | SUCCESS | rc=0 >>
+ 17:11:09 up  2:19,  2 users,  load average: 0.15, 0.03, 0.01
+=====================================
+ansible -i hosts all -m command -a 'hostname'
+localhost | SUCCESS | rc=0 >>
+server
+
+192.168.0.11 | SUCCESS | rc=0 >>
+client1
+=======================================
+[root@server ansible]# ansible -i hosts all -m command -a 'hostname' -u root
+localhost | SUCCESS | rc=0 >>
+server
+
+192.168.0.11 | SUCCESS | rc=0 >>
+client1
+
+[root@server ansible]#
+[root@server ansible]# ansible -i hosts all -m command -a 'hostname' -u centos
+localhost | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).\r\n",
+    "unreachable": true
+}
+192.168.0.11 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).\r\n",
+    "unreachable": true
+}
+
+=================================================
+User module
+===================
+ansible -i hosts all -m user -a "name=admin password=<admin123>" ==> this is not crypto pass
+
+ansible -i inventory selection -m user -a 'name=username state=absent'
+
+ansible -i hosts all -m user -a "name=admin state=absent" -u root
+
+ansible -i hosts all -m user -a "name=admin state=absent"
+
+ansible -i hosts localhost -m user -a "name=admin"
+
+=======================================================
+copy module
+======================
+Usage : ansible -i inventory selection -m copy -a "src=file_name dest=file path to save"
+
+ansible -i hosts all -m copy -a "src=test.sh dest=/root/"
+
+file module 
+==================
+Now change the permission of the file and the owner
+ansible -i hosts production -m file -a "dest=/root/test.sh mode=600 owner=admin group=admin"
+
+================================================
+Creating a folder 
+==================
+
+ansible -i hosts all -m file -a "dest=/root/ansible mode=755 owner=admin group=admin state=directory" -u root
+
+==============================================
+Managing packages 
+===================
+ansible -i hosts localhost -m yum -a "name=vsftpd state=present"
+
+value of state must be one of: absent, installed, latest, present, removed, got: restart"
+
+to update the package 
+=======================
+ansible -i hosts all -m yum -a "name=httpd state=latest"
+
+=============================================== 
+Removing the packages 
+=========================
+ansible -i hosts all -m yum -a "name=httpd state=absent"
+
+Managing services 
+==============================
+Ansible provides the module service to attain that. We can use this module to enable on-boot and start/stop/restart services. Please see the examples for each case. 
+ 
+[?28-?02-?2019 14:33]  Lingala, Poojitha:  
+ansible all --list-hosts  
+ansible all --list-hosts
+  hosts (2):
+    localhost
+    192.168.0.11
+
+
+=====================================
+ansible all -m ping
+localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+192.168.0.11 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+=====================================
+ansible centos -a 'yum update -y'
+
+To update all centos servers
+
+======================================
+Gathering facts
+
+ansible all -m setup
+ansible all -m setup |grep -i uptime
+ansible all -m setup |grep -i address
+ansible all -m setup |grep -i ipv4
+
+=====================================
+ansible localhost -m command  -a "uptime"
+localhost | SUCCESS | rc=0 >>
+ 17:11:02 up  2:19,  2 users,  load average: 0.00, 0.00, 0.00
+
+[root@server ansible]#
+[root@server ansible]#
+[root@server ansible]# ansible localhost -m shell  -a "uptime"
+localhost | SUCCESS | rc=0 >>
+ 17:11:09 up  2:19,  2 users,  load average: 0.15, 0.03, 0.01
+=====================================
+ansible -i hosts all -m command -a 'hostname'
+localhost | SUCCESS | rc=0 >>
+server
+
+192.168.0.11 | SUCCESS | rc=0 >>
+client1
+=======================================
+[root@server ansible]# ansible -i hosts all -m command -a 'hostname' -u root
+localhost | SUCCESS | rc=0 >>
+server
+
+192.168.0.11 | SUCCESS | rc=0 >>
+client1
+
+[root@server ansible]#
+[root@server ansible]# ansible -i hosts all -m command -a 'hostname' -u centos
+localhost | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).\r\n",
+    "unreachable": true
+}
+192.168.0.11 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).\r\n",
+    "unreachable": true
+}
+
+=================================================
+User module
+===================
+ansible -i hosts all -m user -a "name=admin password=<admin123>" ==> this is not crypto pass
+
+ansible -i inventory selection -m user -a 'name=username state=absent'
+
+ansible -i hosts all -m user -a "name=admin state=absent" -u root
+
+ansible -i hosts all -m user -a "name=admin state=absent"
+
+ansible -i hosts localhost -m user -a "name=admin"
+
+=======================================================
+copy module
+======================
+Usage : ansible -i inventory selection -m copy -a "src=file_name dest=file path to save"
+
+ansible -i hosts all -m copy -a "src=test.sh dest=/root/"
+
+file module 
+==================
+Now change the permission of the file and the owner
+ansible -i hosts production -m file -a "dest=/root/test.sh mode=600 owner=admin group=admin"
+
+================================================
+Creating a folder 
+==================
+
+ansible -i hosts all -m file -a "dest=/root/ansible mode=755 owner=admin group=admin state=directory" -u root
+
+==============================================
+Managing packages 
+===================
+ansible -i hosts localhost -m yum -a "name=vsftpd state=present"
+
+value of state must be one of: absent, installed, latest, present, removed, got: restart"
+
+to update the package 
+=======================
+ansible -i hosts all -m yum -a "name=httpd state=latest"
+
+=============================================== 
+Removing the packages 
+=========================
+ansible -i hosts all -m yum -a "name=httpd state=absent"
+
+Managing services 
+==============================
+Ansible provides the module service to attain that. We can use this module to enable on-boot and start/stop/restart services. Please see the examples for each case. 
+ 
+[?28-?02-?2019 14:34]  Lingala, Poojitha:  
+=====================  
+=====================
+Configuration Management vs Orchestration
+=========================================
+
+Chef, Puppet, Ansible, and SaltStack are all “configuration management” tools, which means they are designed to install and manage software on existing servers. CloudFormation and Terraform are “orchestration tools”, which means they are designed to provision the servers themselves, leaving the job of configuring those servers to other tools. These two categories are not mutually exclusive, as most configuration management tools can do some degree of provisioning and most orchestration tools can do some degree of configuration management. But the focus on configuration management or orchestration means that some of the tools are going to be a better fit for certain types of tasks.  
+ 
+[?28-?02-?2019 14:34]  Lingala, Poojitha:  
+Playbooks  
+Playbooks
+===============
+
+Playbooks are Ansible’s configuration, deployment, and orchestration language. They can assign different roles, perform tasks like copying or deleting files/folders, make use of mature modules that shifts most of the functionality or substitute variables to make your deployments dynamic and re-usable.
+
+Playbooks define your deployment steps and configuration. They are modular and can contain variables. They can be used to orchestrate steps across multiple machines. They are configuration files written in simple YAML file which is the Ansible automation language. They can contain multiple tasks and can make use of "mature" modules.
+
+Here is an example of a simple Playbook.
+
+cat simpleplbook.yaml
+---
+
+- hosts: production
+remote_user: root
+
+tasks:
+- name: Setup FTP
+yum: pkg=vsftpd state=installed
+- name: start FTP
+service: name=vsftpd state=started enabled=yes
+
+This is a simple playbook with two tasks as below:
+===================================================
+
+Install FTP server
+Ensure the Service status
+
+
+Let's see each statement in details
+=====================================
+
+- hosts: server  -   This selects the inventory host to initiate this process.
+
+remote_user: root  - This specifies the user which is meant to execute this process on the target servers.
+
+tasks:
+1. - name: Setup FTP
+2. yum: pkg=vsftpd state=installed
+3. - name: start FTP
+4. service: name=vsftpd state=started enabled=yes
+
+These specifies the two tasks which is meant to be performed while running this playbook.  We can divide it to four statements for more clarity. First statement describes the task which is setting up an FTP server and the second statement performs that by choosing/installing the package on the target server. Third statement describes the next task and fourth one ensure the service status by starting the FTP server and enable it on boot.
+
+==========================================
+Now let' see the output of this playbook.
+
+#ansible-playbook -i hosts simpleplbook.yaml
+
+
+
+We can see that playbooks are executed sequentially according to the tasks specified in the playbook. First it chooses the inventory and then it starts performing the plays one by one.
+
+Application Deployments
+==========================
+
+cat webservers_setup.yaml
+---
+
+- hosts: webservers
+vars:
+- Welcomemsg: "Welcome to Ansible Application Deployment"
+
+tasks:
+- name: Setup Nginx
+yum: pkg=nginx state=installed
+- name: Copying the index page
+template: src=index.html dest=/usr/share/nginx/html/index.html
+- name: Enable the service on boot
+service: name=nginx enabled=yes
+- name: start Nginx
+service: name=nginx state=started
+
+
+Now running it 
+
+ansible-playbook -i hosts -s webservers_setup.yaml -u root
+
+PLAY [webservers] *************************************************************
+
+GATHERING FACTS ***************************************************************
+ok: [139.162.35.39] ok: [45.33.76.60]
+
+TASK: [Setup Nginx] ***********************************************************
+changed: [139.162.35.39] changed: [45.33.76.60]
+
+TASK: [Copying the index page] ************************************************
+changed: [139.162.35.39] changed: [45.33.76.60]
+
+TASK: [Enable the service on boot] ********************************************
+changed: [139.162.35.39] changed: [45.33.76.60]
+
+TASK: [start Nginx] ***********************************************************
+changed: [139.162.35.39] changed: [45.33.76.60]
+
+PLAY RECAP ********************************************************************
+139.162.35.39 : ok=5 changed=4 unreachable=0 failed=0
+45.33.76.60 : ok=5 changed=4 unreachable=0 failed=0
+
+This playbook describes four tasks as evident from the result. After running this playbook, we can confirm the status by checking the target servers in the browser.
+
+ansiblewebserver
+
+Now, I'm planning to add a PHP Module namely php-gd to the target servers. I can edit my playbook to include that task too and run it again. Let's see what happens now. My modified playbook is as below:
+
+linuxmonty@linuxmonty-Latitude-E4310:~$ cat webservers_setup.yaml
+---
+
+- hosts: webservers
+vars:
+- Welcomemsg: "Welcome to Nginx default page"
+- WelcomePHP: "PHP GD module enabled"
+
+tasks:
+- name: Setup Nginx
+yum: pkg=nginx state=installed
+- name: Copying the index page
+template: src=index.html dest=/usr/share/nginx/html/index.html
+- name: Enable the service on boot
+service: name=nginx enabled=yes
+- name: start Nginx
+service: name=nginx state=started
+- name: Setup PHP-GD
+yum: pkg=php-gd state=installed
+
+As you can see, I append these highlighted lines to my playbook. So this is how it goes now.
+#############################################################################
+
+ ansible-playbook -i hosts -s webservers_setup.yaml -u root
+
+#############################################################################
+
+On close analysis of this result, you can see that only two sections in this have reported modifications to the target servers. One is the index file modification and other is the installation of our additional PHP module. Now we can evident the changes for the target servers in the browser.
+
+PHPmodule+Nginx 
+ 
