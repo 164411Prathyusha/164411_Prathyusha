@@ -1,0 +1,10 @@
+T2 instances are Burstable Performance Instances that provide a baseline level of CPU performance with the ability to burst above the baseline. The baseline performance and ability to burst are governed by CPU Credits. Each T2 instance receives CPU Credits continuously at a set rate depending on the instance size.  T2 instances accrue CPU Credits when they are idle, and use CPU credits when they are active.  T2 instances are a good choice for workloads that don’t use the full CPU often or consistently, but occasionally need to burst
+
+
+==========================================================================
+
+CPU Credits
+
+One CPU credit is equal to one vCPU running at 100% utilization for one minute. This equates to one vCPU running at 50% utilization for two minutes or two vCPUs running at 25% utilization for two minutes. 
+
+==========================================================================

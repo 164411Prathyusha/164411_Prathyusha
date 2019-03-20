@@ -1,0 +1,16 @@
+Use cases of dynamodb 
+=========================
+Very important for exam 
+
+1. storing s3 metadata 
+2. Storing web session data (ELB session data to persist the client connection can be stored in elasticache or dynamodb) 
+
+3. online mobile gaming 
+4. IOT 
+5. Voting application
+6. logs 
+7. digital ads 
+8. mobile apps 
+9. e-commerce carts 
+
+

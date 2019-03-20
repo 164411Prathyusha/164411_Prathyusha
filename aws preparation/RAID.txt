@@ -1,0 +1,16 @@
+RAID, Volumes & Snapshots
+=============================
+
+RAID = Redundant Array of Independent Disks
+RAID 0 – Striped, no redundancy, good performance
+RAID 1 – mirrored, redundancy
+RAID 5 – good for reads, bad for writes, AWS does not recommend ever putting RAID 5’s on EBS
+RAID 10 – Striped & Mirrored, good redundancy, good performance
+Why create a RAID in AWS?
+Not getting Disk I/O that you require from GP2 or IO1 on a single volume.
+How do you snap a RAID array?
+Stop the app from writing to disk… how?
+Take application consistent snap using one of these 3 methods:
+Freeze file system
+Unmount RAID array
+Shut down EC2 instance

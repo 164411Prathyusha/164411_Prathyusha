@@ -1,0 +1,31 @@
+DynamoDB - NoSQL
+
+===================
+
+●	Non-relational DB
+○	(almost) schema-less
+○	Define primary key and secondary indexes
+●	Push button on the fly-scaling 
+●	No downtime during scaling (seamless)
+●	Uses SSD storage
+●	3 geographical regions
+○	Cross-regional replication - via opensource tool on github
+●	Consistency
+○	Eventual Reads - default
+○	Strongly Reads - if new writes are to be read in under 1 second
+○	Conditional writes
+●	Optimistic concurrency control
+●	One read capacity unit represents one strongly consistent read per second, or two eventually consistent reads per second, for an item up to 4 KB in size
+●	One write capacity unit represents one write per second for an item up to 1 KB in size.
+
+	Queries
+==================
+○	The Query operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).
+○	You must provide the name of the partition key attribute, and a single value for that attribute.Query will return all of the items with that partition key value.
+
+	Scans
+===================
+
+○	A Scan operation reads every item in a table or a secondary index. By default, a Scan operation returns all of the data attributes for every item in the table or index. You can use the ProjectionExpression parameter so that Scan only returns some of the attributes, rather than all of them.
+○	Scan always returns a result set. If no matching items are found, the result set will be empty.
+○	A single Scan request can retrieve a maximum of 1 MB of data; DynamoDB can optionally apply a filter expression to this data, narrowing the results before they are returned to the user.

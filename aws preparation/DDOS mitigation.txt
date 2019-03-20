@@ -1,0 +1,17 @@
+DDOS Mitigation
+=======================
+Minimize the Attack surface
+use ELB/CloudFront/Route 53 to distribute load
+maintain resources in private subnets and use Bastion servers
+Scale to absorb the attack
+scaling helps buy time to analyze and respond to an attack
+auto scaling with ELB to handle increase in load to help absorb attacks
+CloudFront, Route 53 inherently scales as per the demand
+Safeguard exposed resources
+user Route 53 for aliases to hide source IPs and Private DNS
+use CloudFront geo restriction and Origin Access Identity
+use WAF as part of the infrastructure
+Learn normal behavior (IDS/WAF)
+analyze and benchmark to define rules on normal behavior
+use CloudWatch
+Create a plan for attacks

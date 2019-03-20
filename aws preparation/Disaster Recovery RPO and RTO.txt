@@ -1,0 +1,47 @@
+﻿Disaster Recovery RPO and RTO
+==================================
+
+RTO
+===================
+
+ is the time it takes after a disruption to restore a business process to its service level and RPO acceptable amount of data loss measured in time before the disaster occurs
+ 
+Techniques (RTO & RPO reduces and the Cost goes up as we go down)
+=======================================================================
+
+Backup & Restore – Data is backed up and restored, within nothing running
+=================
+
+Pilot light – Only minimal critical service like RDS is running and rest of the services can be 
+=================
+recreated and scaled during recovery
+
+Warm Standby
+==================
+
+ – Fully functional site with minimal configuration is available and can be scaled during recovery
+
+Multi-Site
+==================
+
+ – Fully functional site with identical configuration is available and processes the load
+Services
+
+
+Region and AZ to launch services across multiple facilities
+EC2 instances with the ability to scale and launch across AZs
+EBS with Snapshot to recreate volumes in different AZ or region
+AMI to quickly launch preconfigured EC2 instances
+ELB and Auto Scaling to scale and launch instances across AZs
+VPC to create private, isolated section
+Elastic IP address as static IP address
+ENI with pre allocated Mac Address
+Route 53 is highly available and scalable DNS service to distribute traffic across EC2 instances and ELB in different AZs and regions
+Direct Connect for speed data transfer (takes time to setup and expensive then VPN)
+S3 and Glacier (with RTO of 3-5 hours) provides durable storage
+RDS snapshots and Multi AZ support and Read Replicas across regions
+DynamoDB with cross region replication
+Redshift snapshots to recreate the cluster
+Storage Gateway to backup the data in AWS
+Import/Export to move large amount of data to AWS (if internet speed is the bottleneck)
+CloudFormation, Elastic Beanstalk and Opsworks as orchestration tools for automation and recreate the infrastructure

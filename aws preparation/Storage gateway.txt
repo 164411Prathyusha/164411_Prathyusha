@@ -1,0 +1,32 @@
+Storage Gateway
+==================
+
+Connects on-prem software appliance with AWS storage to provide seamless & secure between an org’s on-prem IT environment & AWS storage infrastructure.
+Asynch replication backed up to S3 as EBS snapshots
+Data is stored within a single region (user specified)
+Software appliance is supported on VMware or Hyper-V
+3 types of storage gateways:
+
+
+Gateway Stored Volumes (cloud is backup)
+==========================================
+
+Keep entire data set on-prem & asynch backed up to S3
+Create storage volumes up to 16TB in size & mount them as iSCSI devices
+Used for offsite backups
+Constantly replicating changes up to S3 in the form of Amazon EBS snapshots
+
+Gateway Cached Volumes (cloud is primary)
+============================================
+
+Only most frequently accessed data is stored on-prem, entire data set is stored in S3
+Using S3 as your SAN array
+Create storage volumes up to 32TBs in size & mount them as iSCSI devices
+If you lose internet access, you lose access to all your data
+
+Gateway Virtual Tape Library (VTL)
+============================================
+
+Limitless collection of virtual tapes
+Up to 10 virtual tape drives per gateway
+Exposes iSCSI interface so populat backup application (Netbackup , Backup Exec, Veeam, ect..) can point directly to VTL

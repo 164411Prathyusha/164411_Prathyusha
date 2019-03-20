@@ -1,0 +1,23 @@
+•	Network Address Translation (NAT) Instances:
+===================================================
+
+o	When creating a NAT instance, disable Source/Destination checks on the instance or you could encounter issues
+o	NAT instances must be in a public subnet
+o	There must be a route out of the private subnet to the NAT instance in order for it to work. The route should be created in the private subnet 0.0.0.0/0  Nat instance 
+o	The amount of traffic that NAT instances support depend on the size of the NAT instance
+o	If you are experiencing any sort of bottleneck issues with a NAT instance, then increase the instance size
+o	HA can be achieved by using Auto-scaling groups, or multiple subnets in different AZ's with a scripted fail-over procedure
+o	NAT instances are always behind a security group
+
+
+
+•	Network Address Translation (NAT) Gateway:
+===================================================
+
+o	NAT Gateways scale automatically up to 10Gbps
+o	There is no need to patch NAT gateways as the AMI is handled by AWS
+o	NAT gateways are automatically assigned a public IP address
+o	When a new NAT gateway has been created, remember to update your route table
+o	No need to assign a security group, NAT gateways are not associated with security groups
+o	Preferred in the Enterprise
+o	No need to disable Source/Destination checks
