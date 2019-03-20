@@ -1,0 +1,16 @@
+http will modify the header and will add the below headers
+============================================================
+
+xff - x forwarded for 
+xfp - x forwarded port 
+xfp and - x forwarded proto
+keep alive 
+
+we can have the client ip registered with http elb using x forwarded for headers
+
+TCP listner
+===============
+
+TCP listner will not modify the headers
+
+we can have the client ip registered with TCP  using proxy protocol. X forwarded for headers are not supported

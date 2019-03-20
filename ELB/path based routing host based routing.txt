@@ -1,0 +1,22 @@
+Path based routing
+=======================
+
+Tutorial: Use Path-Based Routing with Your Application Load Balancer
+You can create a listener with rules to forward requests based on the URL path. This is known as path-based routing. If you are running microservices, you can route traffic to multiple back-end services using path-based routing. For example, you can route general requests to one target group and requests to render images to another target group.
+
+Before You Begin
+Launch your EC2 instances in a virtual private cloud (VPC). Ensure that the security groups for these instances allow access on the listener port and the health check port. For more information, see Target Security Groups.
+
+Verify that your microservices are deployed on the EC2 instances that you plan to register.
+
+===================================================
+Host based routing
+=======================
+Last year I told you about the new AWS Application Load Balancer (an important part of Elastic Load Balancing) and showed you how to set it up to route incoming HTTP and HTTPS traffic based on the path element of the URL in the request. This path-based routing allows you to route requests to, for example, /api to one set of servers (also known as target groups) and /mobile to another set. Segmenting your traffic in this way gives you the ability to control the processing environment for each category of requests. Perhaps /api requests are best processed on Compute Optimized instances, while /mobile requests are best handled by Memory Optimized instances.
+
+Host-Based Routing & More Rules
+Today we are giving you another routing option. You can now create Application Load Balancer rules that route incoming traffic based on the domain name specified in the Host header. Requests to api.example.com can be sent to one target group, requests to mobile.example.com to another, and all others (by way of a default rule) can be sent to a third. You can also create rules that combine host-based routing and path-based routing. This would allow you to route requests to api.example.com/production and api.example.com/sandbox to distinct target groups.
+
+In the past, some of our customers set up and ran a fleet of proxy servers and used them for host-based routing. With today’s launch, the proxy server fleet is no longer needed since the routing can be done using Application Load Balancer rules. Getting rid of this layer of processing will simplify your architecture and reduce operational overhead.
+
+Application Load Balancer already provides several features that support container-based applications including port mapping, health checks, and service discovery. The ability to route on both host and path allows you to build and efficiently scale applications that are comprised of multiple microservices running in individual Amazon EC2 Container Service containers. You can use host-based routing to further simplify your service discovery mechanism by aligning your service names and your container names.

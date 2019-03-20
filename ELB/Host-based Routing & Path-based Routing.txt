@@ -1,0 +1,6 @@
+Host-based Routing & Path-based Routing
+=========================================
+
+Host-based routing use host conditions to define rules that forward requests to different target groups based on the host name in the host header. This enables ALB to support multiple domains using a single load balancer.
+Path-based routing use path conditions to define rules that forward requests to different target groups based on the URL in the request. Each path condition has one path pattern. If the URL in a request matches the path pattern in a listener rule exactly, the request is routed using that rule.
+Only ALB supports Host-based & Path-based routing.

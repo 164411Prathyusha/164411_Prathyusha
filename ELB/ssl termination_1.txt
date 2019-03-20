@@ -1,0 +1,9 @@
+SSL termination
+
+=======================
+
+SSL Server Certificates
+
+If you use HTTPS or SSL for your front-end connections, you must deploy an X.509 certificate (SSL server certificate) on your load balancer. The load balancer decrypts requests from clients before sending them to the back-end instances (known as SSL termination). For more information, see SSL/TLS Certificates for Classic Load Balancers.
+
+If you don't want the load balancer to handle the SSL termination (known as SSL offloading), you can use TCP for both the front-end and back-end connections, and deploy certificates on the registered instances handling requests. 

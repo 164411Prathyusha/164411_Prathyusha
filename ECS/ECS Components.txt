@@ -1,0 +1,40 @@
+﻿ECS Components
+===================
+
+In a nutshell these are the components of ECS:
+
+    ECS agent:
+---------------
+
+        Daemon by amazon used for connecting instances to a cluster.
+        If installed, ec2 automatically is attached to default cluster.
+
+    Task Definition:
+
+---------------
+
+        Describes the container(s), volume(s)… of an ECS Service. Task definitions have revisions.
+        A Task definition should group containers which share common purpose.
+        Task definitions can only have up to 10 container definitions.
+        Task definations are written in JSON 
+
+    Service:
+
+----------------
+
+        Used for configuring the amount of tasks definitions desired to be running.
+        Defines the scaling and deployment rules for the tasks definitions.
+        Used by the ECS Scheduler in order to have the amount of healthy task definitions running.
+
+    Service Scheduler:
+---------------------
+
+        Internal service by amazon (hidden for aws users or apis) for managing the cluster.
+
+    Cluster:
+---------------------
+
+        It simply holds the elements above.
+        Clusters can contain multiple different container instance types.
+        Clusters are region-specific.
+        Container instances can only be a part of one cluster at a time.

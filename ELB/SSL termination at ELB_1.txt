@@ -1,0 +1,7 @@
+
+Should SSL be terminated at a load balancer?
+==============================================
+
+When hosting a cluster of web application servers it’s common to have a reverse proxy (HAProxy, Nginx, F5, etc.) in between the cluster and the public internet to load balance traffic among app servers. In order to perform deep packet inspection, SSL must be terminated at the load balancer (or earlier), but traffic between the load balancer and the app servers would be unencrypted. Wouldn't early termination of SSL leave the app servers vulnerable to packet sniffing or ARP poisoning?
+
+Should SSL be offloaded? If so, how can it be done without compromising the integrity of the data being served? My main concern is for a web application where message layer encryption isn't an 

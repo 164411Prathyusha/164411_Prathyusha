@@ -1,0 +1,7 @@
+The X-Forwarded-For (XFF) HTTP header field is a common method for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or load balancer.
+
+The XFF HTTP request header was introduced by the Squid caching proxy server's developers. An RFC was proposed at the Internet Engineering Task Force (IETF).[1]
+
+X-Forwarded-For is also an email-header indicating that an email-message was forwarded from one or more other accounts (probably automatically).[2]
+
+In this context, the caching servers are most often those of large ISPs who either encourage or force their users to use proxy servers for access to the World Wide Web, something which is often done to reduce external bandwidth through caching. In some cases, these proxy servers are transparent proxies, and the user may be unaware that they are using them.

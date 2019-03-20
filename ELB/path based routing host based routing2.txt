@@ -1,0 +1,9 @@
+Application load balancers also support two other types of routing. Host based and path based.
+
+http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#host-conditions
+
+Host based routing will allow you to route based off of the incoming host from that website. So for instance if you have website1.com and website2.com you could send them both through the same ALB and route accordingly.
+
+http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#path-conditions
+
+Similarly you can do the same thing with the path. If you websites were website1.com/site1/index.html and website1.com/site2/index.html you could put both of those on the same ALB and route accordingly.

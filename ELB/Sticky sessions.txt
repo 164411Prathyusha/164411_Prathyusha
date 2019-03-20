@@ -1,0 +1,28 @@
+You have set up an Elastic Load Balancer (ELB) with the usual default settings, which route each request
+Amazon AWS-Solution-Architect-Associate Exam
+Exam Pass
+independently to the application instance with the smallest load. However, someone has asked you to
+bind a user's session to a specific application instance so as to ensure that all requests coming from the
+user during the session will be sent to the same application instance. AWS has a feature to do this. What
+is it called?
+A. Connection draining
+B. Proxy protocol
+C. Tagging
+D. Sticky session
+Answer: D
+Explanation:
+An Elastic Load Balancer(ELB) by default, routes each request independently to the application instance
+with the smallest load. However, you can use the sticky session feature (also known as session affinity),
+which enables the load balancer to bind a user's session to a specific application instance. This ensures
+that all requests coming from the user during the session will be sent to the same application instance.
+The key to managing the sticky session is determining how long your load balancer should consistently
+route the user's request to the same application instance. If your application has its own session cookie,
+then you can set Elastic Load Balancing to create the session cookie to follow the duration specified by
+the application's session cookie. If your application does not have its own session cookie, then you can
+set Elastic Load Balancing to create a session cookie by specifying your own stickiness duration. You can
+associate stickiness duration for only HTTP/HTTPS load balancer listeners.
+An application instance must always receive and send two cookies: A cookie that defines the stickiness
+duration and a special Elastic Load Balancing cookie named AWSELB, that has the mapping to the
+application instance.
+Reference:
+http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide
